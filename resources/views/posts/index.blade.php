@@ -2,15 +2,14 @@
 
 @section('content')
 
-	<div class="d-flex justify-content-end mb-3"><a href="{{ route('posts.create') }}" class="btn btn-info">Create</a></div>
+	<div class="d-flex justify-content-end mb-3 "><a href="{{ route('posts.create') }}" class="btn btn-info">Create</a></div>
 
-	<table class="table table-bordered">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>id</th>
 				<th>title</th>
-				<th>content</th>
-
+				<th>image</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -20,8 +19,7 @@
 				<tr>
 					<td>{{ $post->id }}</td>
 					<td>{{ $post->title }}</td>
-					<td>{{ $post->content }}</td>
-
+					<td><img src="{{ asset('storage/'.$post->image) }}" height="20px"></td>
 					<td>
 						<div class="d-flex gap-2">
                             <a href="{{ route('posts.show', [$post->id]) }}" class="btn btn-info">Show</a>

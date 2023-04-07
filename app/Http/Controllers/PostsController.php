@@ -10,7 +10,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::select('id', 'title','image')->get();
         return view('posts.index', ['posts' => $posts]);
     }
 
