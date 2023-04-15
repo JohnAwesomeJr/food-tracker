@@ -5,7 +5,7 @@
 	<h1>{{ $post->title }}</h1>
 
 	@if($post->image)
-		<img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" style="max-width: 100px;">
+		<img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" style="width: 500px;">
 	@endif
 
 	<p>{{ $post->content }}</p>
