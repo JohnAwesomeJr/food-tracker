@@ -5,6 +5,12 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/spacelab/bootstrap.min.css">
 </head>
 <body>
+@if (env('APP_ENV') === 'production')
+    <p>This is the production environment.</p>
+@else
+    <p>This is not the production environment.</p>
+@endif
+
 	<div class="container">
 		@yield('content')
 	</div>
