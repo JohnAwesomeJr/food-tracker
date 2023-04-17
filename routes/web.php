@@ -20,4 +20,6 @@ Route::get('/', function () {
 
 Route::resource('posts', PostsController::class);
 
-// URL::forceScheme('https'); 
+if (App::environment('production')) {  
+    URL::forceScheme('https');  
+}  
