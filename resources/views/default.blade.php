@@ -7,19 +7,26 @@
 <body>
 <style>
 #production-banner{
-	color:white;
-	background:red;
+
 	position:fixed;
 	padding:20px 0px;
 	bottom:0px;
 	left:0px;
 	width:100%;
 }
+.banner-style-pro{
+	color:white;
+	background:red;
+}
+.banner-style-loc{
+	color:gray;
+	background:lightgray;
+}
 </style>
 @if (env('APP_ENV') === 'production')
-    <p id="production-banner">This is the production environment.</p>
+    <p id="production-banner" class="banner-style-pro">This is the production environment.</p>
 @else
-    <p>This is not the production environment.</p>
+    <p id="production-banner" class="banner-style-loc">This is not the production environment.</p>
 @endif
 
 	<div class="container">
