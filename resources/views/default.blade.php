@@ -7,12 +7,11 @@
 <body>
 <style>
 #production-banner{
-
 	position:fixed;
-	padding:20px 0px;
+	border-radius:5px;
+	padding:20px;
 	bottom:0px;
-	left:0px;
-	width:100%;
+	right:0px;
 }
 .banner-style-pro{
 	color:white;
