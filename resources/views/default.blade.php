@@ -8,7 +8,7 @@
 @if (env('APP_ENV') === 'production')
     <p>This is the production environment.</p>
 @else
-    <p>This is not the production environment.</p>
+    <p style="color:red;">This is not the production environment.</p>
 @endif
 
 	<div class="container">
