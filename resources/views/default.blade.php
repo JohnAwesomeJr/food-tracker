@@ -10,6 +10,7 @@
 	color:white;
 	background:red;
 	position:fixed;
+	padding:20px 0px;
 	bottom:0px;
 	left:0px;
 	width:100%;
