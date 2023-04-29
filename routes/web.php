@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ImagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', PostsController::class);
+Route::resource('images', ImagesController::class);
 
 if (App::environment('production')) {  
     URL::forceScheme('https');  
