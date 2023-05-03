@@ -44,5 +44,7 @@
 			@endforeach
 		</tbody>
 	</table>
+	{{ $datapoints->links() }}
+
 
 @stop

@@ -25,7 +25,9 @@ class DatapointsController extends Controller
         // Fetch datapoints that belong to the specified tracker ID and the authenticated user's ID
         $datapoints = Datapoint::where('forenkey_tracker_id', $trackerId)
             ->where('forenkey_user_id', $userId)
-            ->get();
+            ->paginate(3)
+            ->appends(['tracker_id' => $trackerId]);
+
 
         return view('datapoints.index', ['datapoints' => $datapoints, 'trackerId' => $trackerId]);
     }
