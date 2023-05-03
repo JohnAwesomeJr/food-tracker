@@ -7,6 +7,12 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\TrackersController;
 use App\Http\Controllers\DatapointsController;
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
+
+
+require __DIR__ . '/auth.php';
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,13 +27,18 @@ use App\Http\Controllers\DatapointsController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('posts', PostsController::class);
-Route::resource('images', ImagesController::class);
 
 Route::middleware('auth')->group(function () {
+    // profile managment
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // main routes
     Route::resource('trackers', TrackersController::class);
     Route::resource('datapoints', DatapointsController::class);
-    Route::get('/datapoints/trackerid/{id}', [DatapointsController::class, 'index'])->name('datapoints.trackerid');
+    // random routes
+    Route::resource('posts', PostsController::class);
+    Route::resource('images', ImagesController::class);
 });
 
 
@@ -37,15 +48,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
 
-
+// Forces HTTPS in production
 if (App::environment('production')) {
     URL::forceScheme('https');
 }
-require __DIR__ . '/auth.php';

@@ -25,7 +25,7 @@
                         <div class="d-flex gap-2">
                             <a href="{{ route('trackers.show', [$tracker->id]) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('trackers.edit', [$tracker->id]) }}" class="btn btn-primary">Edit</a>
-                            <a href="/datapoints/trackerid/{{ $tracker->id }}" class="btn btn-secondary">View Datapoints</a>
+                            <a href="{{ route('datapoints.index') }}?tracker_id={{ $tracker->id }}" class="btn btn-secondary">View Datapoints</a>
                             {!! Form::open(['method' => 'DELETE', 'route' => ['trackers.destroy', $tracker->id]]) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}

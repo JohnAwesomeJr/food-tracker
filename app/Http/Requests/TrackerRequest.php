@@ -24,9 +24,8 @@ class TrackerRequest extends FormRequest
     public function rules()
     {
         return
-        [
-			'trackName' => 'required',
-			'forenkey_user_id' => 'required',
-        ];
+            [
+                'trackName' => 'required',
+            ];
     }
 }

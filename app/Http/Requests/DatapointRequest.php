@@ -24,11 +24,11 @@ class DatapointRequest extends FormRequest
     public function rules()
     {
         return
-        [
-			'image' => 'required',
-			'value' => 'required',
-			'forenkey_tracker_id' => 'required',
-			'forenkey_user_id' => 'required',
-        ];
+            [
+                // 'image' => 'required',
+                // 'value' => 'required',
+                // 'forenkey_tracker_id' => 'required',
+                // 'forenkey_user_id' => 'required',
+            ];
     }
 }

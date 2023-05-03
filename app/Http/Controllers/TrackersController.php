@@ -45,7 +45,9 @@ class TrackersController extends Controller
         $tracker->forenkey_user_id = Auth::id();
         $tracker->save();
 
-        return to_route('trackers.index');
+        $id = $tracker->id;
+
+        return redirect()->to("/datapoints/?tracker_id={$id}");
     }
 
     /**

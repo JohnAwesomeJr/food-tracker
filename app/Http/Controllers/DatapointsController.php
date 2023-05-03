@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Datapoint;
 use App\Http\Requests\DatapointRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class DatapointsController extends Controller
 {
@@ -15,17 +16,18 @@ class DatapointsController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index($id)
+    public function index(Request $request)
     {
+        $trackerId = $request->input('tracker_id');
         // Get the authenticated user's ID
         $userId = Auth::id();
 
         // Fetch datapoints that belong to the specified tracker ID and the authenticated user's ID
-        $datapoints = Datapoint::where('forenkey_tracker_id', $id)
+        $datapoints = Datapoint::where('forenkey_tracker_id', $trackerId)
             ->where('forenkey_user_id', $userId)
             ->get();
 
-        return view('datapoints.index', ['datapoints' => $datapoints]);
+        return view('datapoints.index', ['datapoints' => $datapoints, 'trackerId' => $trackerId]);
     }
 
     /**
@@ -33,9 +35,10 @@ class DatapointsController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('datapoints.create');
+        $trackerId = $request->input('tracker_id');
+        return view('datapoints.create', ['trackerId' => $trackerId]);
     }
 
     /**
@@ -46,14 +49,15 @@ class DatapointsController extends Controller
      */
     public function store(DatapointRequest $request)
     {
+        $trackerId = $request->input('forenkey_tracker_id');
         $datapoint = new Datapoint;
         $datapoint->image = $request->input('image');
         $datapoint->value = $request->input('value');
-        $datapoint->forenkey_tracker_id = $request->input('forenkey_tracker_id');
-        $datapoint->forenkey_user_id = $request->input('forenkey_user_id');
+        $datapoint->forenkey_tracker_id = $trackerId;
+        $datapoint->forenkey_user_id = Auth::id();
         $datapoint->save();
 
-        return to_route('datapoints.index');
+        return redirect("/datapoints?tracker_id={$trackerId}");
     }
 
     /**

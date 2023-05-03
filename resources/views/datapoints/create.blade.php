@@ -30,11 +30,7 @@
 
     <div class="mb-3">
         {{ Form::label('forenkey_tracker_id', 'Forenkey_tracker_id', ['class' => 'form-label']) }}
-        {{ Form::text('forenkey_tracker_id', null, ['class' => 'form-control']) }}
-    </div>
-    <div class="mb-3">
-        {{ Form::label('forenkey_user_id', 'Forenkey_user_id', ['class' => 'form-label']) }}
-        {{ Form::text('forenkey_user_id', null, ['class' => 'form-control']) }}
+        {{ Form::text('forenkey_tracker_id', $trackerId, ['class' => 'form-control','readonly' => true]) }}
     </div>
 
 
