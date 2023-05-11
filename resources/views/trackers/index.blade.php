@@ -1,15 +1,16 @@
 @extends('default')
 
+
 @section('content')
 
     <div class="d-flex justify-content-end mb-3"><a href="{{ route('trackers.create') }}" class="btn btn-info">Create</a></div>
 
-    <table class="table table-bordered">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>id</th>
-                <th>trackName</th>
-                <th>forenkey_user_id</th>
+                <th scope="col">id</th>
+                <th scope="col">trackName</th>
+                <!-- <th scope="col">forenkey_user_id</th> -->
 
                 <th>Action</th>
             </tr>
@@ -17,9 +18,9 @@
         <tbody>
             @foreach ($trackers as $tracker)
                 <tr>
-                    <td>{{ $tracker->id }}</td>
+                    <td scope="row">{{ $tracker->id }}</td>
                     <td>{{ $tracker->trackName }}</td>
-                    <td>{{ $tracker->forenkey_user_id }}</td>
+                    <!-- <td>{{ $tracker->forenkey_user_id }}</td> -->
 
                     <td>
                         <div class="d-flex gap-2">
