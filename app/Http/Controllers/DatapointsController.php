@@ -8,6 +8,7 @@ use App\Models\Datapoint;
 use App\Http\Requests\DatapointRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DatapointsController extends Controller
 {
@@ -54,6 +55,12 @@ class DatapointsController extends Controller
         // Check if a file was uploaded
         $file = $request->file('imageFile');
         $filename = $file->getClientOriginalName();
+        $trackerId = $request->input('forenkey_tracker_id');
+        $datapoint = new Datapoint;
+        $datapoint->image = $filename;
+        $datapoint->value = $request->input('value');
+        $datapoint->forenkey_tracker_id = $trackerId;
+        $datapoint->forenkey_user_id = Auth::id();
         if ($request->hasFile('imageFile')) {
             $file = $request->file('imageFile');
             // Generate a unique filename
@@ -64,12 +71,6 @@ class DatapointsController extends Controller
             $datapoint = new Datapoint;
             $datapoint->image = $path;
         }
-        $trackerId = $request->input('forenkey_tracker_id');
-        $datapoint = new Datapoint;
-        $datapoint->image = $filename;
-        $datapoint->value = $request->input('value');
-        $datapoint->forenkey_tracker_id = $trackerId;
-        $datapoint->forenkey_user_id = Auth::id();
         $datapoint->save();
 
         return redirect("/datapoints?tracker_id={$trackerId}");
@@ -127,8 +128,14 @@ class DatapointsController extends Controller
     public function destroy($id)
     {
         $datapoint = Datapoint::findOrFail($id);
+        $fileName = $datapoint->image; // Assuming the file path is stored in the 'image' field
+        $filePath = 'public/images/' . $fileName;
+        if ($filePath) {
+            Storage::delete($filePath); // Assuming you're using the default storage disk
+            // Alternatively, if you're not using the Storage facade, you can directly delete the file like this:
+            // unlink(storage_path('app/' . $filePath));
+        }
         $datapoint->delete();
-
         return to_route('datapoints.index');
     }
 }

@@ -73,19 +73,15 @@
                     const context = canvas.getContext("2d");
                     context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-                    // convert the canvas to WebP format
+                    // convert the canvas back to a file and update the file input with the resized image
                     canvas.toBlob(function(blob) {
-                        // create a new File object with the converted WebP blob
-                        const convertedFile = new File([blob], file.name, {
-                            type: 'image/webp'
+                        const resizedFile = new File([blob], file.name, {
+                            type: file.type
                         });
-
-                        // update the file input with the converted file
                         const newFileList = new DataTransfer();
-                        newFileList.items.add(convertedFile);
+                        newFileList.items.add(resizedFile);
                         fileInput.files = newFileList.files;
-                    }, 'image/webp', 1); // specify the quality (1 = highest)
-
+                    }, file.type);
                 };
 
                 // set the image source to the data URL from the FileReader
