@@ -6,7 +6,8 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\TrackersController;
 use App\Http\Controllers\DatapointsController;
-
+use App\Http\Controllers\Food_datapointsController;
+use App\Http\Controllers\Food_trackersController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
     // random routes
     Route::resource('posts', PostsController::class);
     Route::resource('images', ImagesController::class);
+
+    // tracking routs
+    Route::resource('food_trackers', Food_trackersController::class);
+    Route::resource('food_datapoints', Food_datapointsController::class);
 });
 
 
