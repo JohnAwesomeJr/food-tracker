@@ -55,18 +55,14 @@ class DatapointsController extends Controller
         $file = $request->file('imageFile');
         $filename = $file->getClientOriginalName();
         if ($request->hasFile('imageFile')) {
-
+            $file = $request->file('imageFile');
             // Generate a unique filename
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-
             // Save the file to the storage disk (e.g., "public" disk)
-            $path = $file->storeAs('public/images', $filename);
-
+            $path = $file->storeAs('images', $filename);
             // Update the datapoint's image property with the file path
             $datapoint = new Datapoint;
             $datapoint->image = $path;
-
-            // ... Rest of your code ...
         }
         $trackerId = $request->input('forenkey_tracker_id');
         $datapoint = new Datapoint;
