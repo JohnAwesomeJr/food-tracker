@@ -23,11 +23,11 @@
         <tbody>
             @foreach ($datapoints as $datapoint)
                 <tr>
-                    <td>{{ $datapoint->id }}</td>
+                    {{-- <td>{{ $datapoint->id }}</td> --}}
                     <td><img src="/storage/images/{{ $datapoint->image }}" style="height:40px;"></td>
                     <td>{{ $datapoint->value }}</td>
-                    <td>{{ $datapoint->forenkey_tracker_id }}</td>
-                    <td>{{ $datapoint->forenkey_user_id }}</td>
+                    {{-- <td>{{ $datapoint->forenkey_tracker_id }}</td> --}}
+                    {{-- <td>{{ $datapoint->forenkey_user_id }}</td> --}}
 
                     <td>
                         <div class="d-flex gap-2">
