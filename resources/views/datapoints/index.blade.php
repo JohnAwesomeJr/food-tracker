@@ -11,11 +11,11 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>id</th>
+                {{-- <th>id</th> --}}
                 <th>image</th>
                 <th>value</th>
-                <th>forenkey_tracker_id</th>
-                <th>forenkey_user_id</th>
+                {{-- <th>forenkey_tracker_id</th> --}}
+                {{-- <th>forenkey_user_id</th> --}}
 
                 <th>Action</th>
             </tr>
