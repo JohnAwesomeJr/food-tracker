@@ -25,6 +25,8 @@ class DatapointRequest extends FormRequest
     {
         return
             [
+                'imageFile' => 'required|image', // Validate 'image' field as required and image file with allowed mime types
+                // Other validation rules for your fields
                 // 'image' => 'required',
                 // 'value' => 'required',
                 // 'forenkey_tracker_id' => 'required',

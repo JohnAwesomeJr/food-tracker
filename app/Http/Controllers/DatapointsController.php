@@ -51,9 +51,26 @@ class DatapointsController extends Controller
      */
     public function store(DatapointRequest $request)
     {
+        // Check if a file was uploaded
+        $file = $request->file('imageFile');
+        $filename = $file->getClientOriginalName();
+        if ($request->hasFile('imageFile')) {
+
+            // Generate a unique filename
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+
+            // Save the file to the storage disk (e.g., "public" disk)
+            $path = $file->storeAs('public/images', $filename);
+
+            // Update the datapoint's image property with the file path
+            $datapoint = new Datapoint;
+            $datapoint->image = $path;
+
+            // ... Rest of your code ...
+        }
         $trackerId = $request->input('forenkey_tracker_id');
         $datapoint = new Datapoint;
-        $datapoint->image = $request->input('image');
+        $datapoint->image = $filename;
         $datapoint->value = $request->input('value');
         $datapoint->forenkey_tracker_id = $trackerId;
         $datapoint->forenkey_user_id = Auth::id();
