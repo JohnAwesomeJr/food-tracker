@@ -44,7 +44,7 @@
 
     <script>
         // get the file input element
-        const fileInput = document.getElementById("image");
+        const fileInput = document.getElementById("imageFile");
 
         // add an event listener for when the user selects a file
         fileInput.addEventListener("change", function(event) {
