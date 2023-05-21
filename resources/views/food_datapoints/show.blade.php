@@ -14,6 +14,7 @@
                     <div class="p-6 text-gray-900">
 
                         {{ $food_datapoint->id }}
+                        <img src="/storage/images/{{ $food_datapoint->image_file_name }}">
                     </div>
                 </div>
             </div>
