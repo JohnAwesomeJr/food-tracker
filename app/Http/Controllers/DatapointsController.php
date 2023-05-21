@@ -55,6 +55,7 @@ class DatapointsController extends Controller
         // Check if a file was uploaded
         $file = $request->file('imageFile');
         $filename = $file->getClientOriginalName();
+
         $trackerId = $request->input('forenkey_tracker_id');
         $datapoint = new Datapoint;
         $datapoint->image = $filename;

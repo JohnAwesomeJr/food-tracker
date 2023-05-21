@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Food_datapoint;
 use App\Http\Requests\Food_datapointRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Food_datapointsController extends Controller
 {
@@ -40,10 +41,24 @@ class Food_datapointsController extends Controller
      */
     public function store(Food_datapointRequest $request)
     {
+        $file = $request->file('fileUpload');
+        $filename = $file->getClientOriginalName();
+
+        // Check if a file was uploaded
+        if ($request->hasFile('fileUpload')) {
+            $file = $request->file('fileUpload');
+            // Generate a unique filename
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            // Save the file to the storage disk (e.g., "public" disk)
+            $path = $file->storeAs('public/images', $filename);
+            // Update the datapoint's image property with the file path
+            $food_datapoint = new food_Datapoint;
+            $food_datapoint->image_file_name = $path;
+        }
         $food_tracker_id = $request->input('food_tracker_id');
         $food_datapoint = new Food_datapoint;
-        $food_datapoint->image_file_name = $request->input('image_file_name');
         $food_datapoint->rating = $request->input('rating');
+        $food_datapoint->image_file_name = $filename;
         $food_datapoint->food_tracker_id = $request->input('food_tracker_id');
         $food_datapoint->save();
         return redirect("/food_datapoints?food_tracker_id={$food_tracker_id}");
@@ -100,9 +115,13 @@ class Food_datapointsController extends Controller
     public function destroy($id)
     {
         $food_datapoint = Food_datapoint::findOrFail($id);
+        $fileName = $food_datapoint->image_file_name;
+        $filePath = 'public/images/' . $fileName;
+        if ($filePath) {
+            Storage::delete($filePath);
+        }
         $food_tracker_id = $food_datapoint->food_tracker_id;
         $food_datapoint->delete();
         return redirect()->route('food_datapoints.index', ['food_tracker_id' => $food_tracker_id]);
-        return to_route('food_datapoints.index');
     }
 }
