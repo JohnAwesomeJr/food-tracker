@@ -25,16 +25,21 @@
                         {!! Form::open(['route' => 'food_datapoints.store', 'enctype' => 'multipart/form-data']) !!}
 
                         <div class="mb-3">
-                            {{ Form::label('image_file_name', 'Image_file_name', ['class' => 'form-label']) }}
-                            {{ Form::text('image_file_name', null, ['class' => 'form-control']) }}
-                        </div>
-                        <div class="mb-3">
                             {{ Form::label('rating', 'Rating', ['class' => 'form-label']) }}
-                            {{ Form::text('rating', null, ['class' => 'form-control']) }}
+                            <div class="form-check">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <label class="form-check-label">
+                                    </label>
+                                    {{ Form::radio('rating', $i, false, ['class' => 'form-check-input']) }}
+                                    {{ $i }}
+                                    <br>
+                                    <br>
+                                @endfor
+                            </div>
                         </div>
+
                         <div class="mb-3">
-                            {{ Form::label('food_tracker_id', 'Food_tracker_id', ['class' => 'form-label']) }}
-                            {{ Form::text('food_tracker_id', app('request')->input('food_tracker_id'), ['class' => 'form-control', 'readonly' => true]) }}
+                            {{ Form::text('food_tracker_id', app('request')->input('food_tracker_id'), ['class' => 'form-control', 'readonly' => true, 'hidden' => true]) }}
                         </div>
                         <div class="mb-3">
                             {{ Form::label('fileUpload', 'Image Upload', ['class' => 'form-label']) }}

@@ -25,7 +25,7 @@ class Food_datapointRequest extends FormRequest
     {
         return
             [
-                'image_file_name' => 'required',
+                // 'image_file_name' => 'required',
                 'rating' => 'required',
                 'food_tracker_id' => 'required',
             ];
