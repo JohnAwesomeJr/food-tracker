@@ -38,8 +38,9 @@
                                 @foreach ($food_datapoints as $food_datapoint)
                                     <tr>
                                         <td>{{ $food_datapoint->id }}</td>
-                                        <td><img src="/storage/images/{{ $food_datapoint->image_file_name }}"
-                                                style="height:40px;">
+                                        <td>
+                                            <img
+                                                src="/storage/images/{{ $food_datapoint->image_file_name }}"style="height:40px;">
                                         </td>
                                         <td>{{ $food_datapoint->rating }}</td>
                                         <td>{{ $food_datapoint->food_tracker_id }}</td>

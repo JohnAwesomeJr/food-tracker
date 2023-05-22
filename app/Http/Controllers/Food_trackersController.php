@@ -112,7 +112,9 @@ class Food_trackersController extends Controller
 
         // Delete the images
         foreach ($imageFileNames as $imageFileName) {
-            Storage::delete('public/images/' . $imageFileName);
+            if ($imageFileName != "old.jpg") {
+                Storage::delete('public/images/' . $imageFileName);
+            }
         }
 
         // Delete the food_tracker

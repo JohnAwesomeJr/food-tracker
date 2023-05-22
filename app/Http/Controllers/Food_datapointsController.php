@@ -41,19 +41,15 @@ class Food_datapointsController extends Controller
      */
     public function store(Food_datapointRequest $request)
     {
-        $file = $request->file('fileUpload');
-        $filename = $file->getClientOriginalName();
-
+        $filename = "old.jpg";
         // Check if a file was uploaded
         if ($request->hasFile('fileUpload')) {
             $file = $request->file('fileUpload');
+            $filename = $file->getClientOriginalName();
             // Generate a unique filename
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             // Save the file to the storage disk (e.g., "public" disk)
-            $path = $file->storeAs('public/images', $filename);
-            // Update the datapoint's image property with the file path
-            $food_datapoint = new food_Datapoint;
-            $food_datapoint->image_file_name = $path;
+            $file->storeAs('public/images', $filename);
         }
         $food_tracker_id = $request->input('food_tracker_id');
         $food_datapoint = new Food_datapoint;
@@ -117,7 +113,7 @@ class Food_datapointsController extends Controller
         $food_datapoint = Food_datapoint::findOrFail($id);
         $fileName = $food_datapoint->image_file_name;
         $filePath = 'public/images/' . $fileName;
-        if ($filePath) {
+        if ($fileName != "old.jpg") {
             Storage::delete($filePath);
         }
         $food_tracker_id = $food_datapoint->food_tracker_id;
