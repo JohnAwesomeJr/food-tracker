@@ -18,4 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 docker-compose.yml
-!/storage/app/public/images/old.jpg
+!storage/app/public/images/old.jpg
